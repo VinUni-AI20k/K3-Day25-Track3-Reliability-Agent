@@ -8,7 +8,7 @@ from pathlib import Path
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--metrics", default="reports/metrics.json")
-    parser.add_argument("--out", default="reports/final_report.md")
+    parser.add_argument("--out", default="reports/auto_summary.md")
     args = parser.parse_args()
     metrics = json.loads(Path(args.metrics).read_text())
     lines = [

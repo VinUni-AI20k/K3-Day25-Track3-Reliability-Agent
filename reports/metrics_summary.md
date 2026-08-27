@@ -1,0 +1,30 @@
+# Reliability Metrics Summary (auto-generated)
+
+## Metrics Summary
+
+| Metric | Value |
+|---|---:|
+| total_requests | 300 |
+| availability | 0.9767 |
+| error_rate | 0.0233 |
+| latency_p50_ms | 283.79 |
+| latency_p95_ms | 318.52 |
+| latency_p99_ms | 319.56 |
+| fallback_success_rate | 0.9222 |
+| cache_hit_rate | 0.6167 |
+| circuit_open_count | 11 |
+| recovery_time_ms | 3487.2127771377563 |
+| estimated_cost | 0.044378 |
+| estimated_cost_saved | 0.185 |
+
+## Chaos Scenarios
+
+| Scenario | Status |
+|---|---|
+| primary_timeout_100 | pass |
+| primary_flaky_50 | pass |
+| all_healthy | pass |
+
+## Analysis TODO(student)
+
+Explain what failed, why the fallback path worked or did not work, and what you would change before production.

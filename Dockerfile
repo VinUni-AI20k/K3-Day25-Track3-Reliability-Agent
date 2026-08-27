@@ -8,4 +8,5 @@ COPY configs ./configs
 COPY data ./data
 COPY reports ./reports
 RUN pip install --no-cache-dir -e ".[dev]"
-CMD ["make", "test"]
+# python:3.11-slim ships no `make`, so invoke the test runner directly.
+CMD ["pytest", "-q"]

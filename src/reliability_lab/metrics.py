@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import csv
 import json
+from collections.abc import Iterable
 from pathlib import Path
 from statistics import median
-from typing import Iterable
 
 from pydantic import BaseModel, Field
 
@@ -64,15 +65,22 @@ class RunMetrics(BaseModel):
         Path(path).write_text(json.dumps(self.to_report_dict(), indent=2, ensure_ascii=False))
 
     def write_csv(self, path: str | Path) -> None:
-        """Export metrics to CSV format.
+        """Export metrics as a single-row CSV.
 
-        TODO(student): Implement CSV export:
-        1. Get report dict via self.to_report_dict()
-        2. Flatten the "scenarios" dict: each scenario becomes "scenario_{name}" column
-        3. Write a single-row CSV with csv.DictWriter (import csv at top of file)
-        4. Create parent directories if needed
+        The nested ``scenarios`` mapping is flattened into one ``scenario_{name}``
+        column per scenario so the file stays a flat, spreadsheet-friendly row.
         """
-        raise NotImplementedError("TODO: implement write_csv()")
+        report = self.to_report_dict()
+        row: dict[str, object] = {k: v for k, v in report.items() if k != "scenarios"}
+        for name, status in self.scenarios.items():
+            row[f"scenario_{name}"] = status
+
+        target = Path(path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with target.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, fieldnames=list(row))
+            writer.writeheader()
+            writer.writerow(row)
 
 
 def percentile(values: Iterable[float], q: float) -> float:

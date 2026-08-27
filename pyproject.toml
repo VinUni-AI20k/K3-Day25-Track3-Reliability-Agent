@@ -1,5 +1,5 @@
 [project]
-name = "day10-reliability-agent-lab"
+name = "day25-reliability-agent-lab"
 version = "0.1.0"
 description = "Production-style skeleton for LLM agent reliability: circuit breakers, caching, metrics, and chaos testing."
 requires-python = ">=3.10"
@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.2", "pytest-cov>=5.0", "ruff>=0.5", "mypy>=1.10"]
+dev = ["pytest>=8.2", "pytest-cov>=5.0", "ruff>=0.5", "mypy>=1.10", "types-PyYAML>=6.0"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
